@@ -14,6 +14,9 @@
             margin: 0;
             background-color: #f9f9f9;
             text-align: center;
+            position: relative;
+            width: 100%;
+            padding: 0 10%;  /* Regresé el padding a 10% para la primera parte */
         }
 
         .container {
@@ -21,10 +24,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            max-width: 100%;
         }
 
         .buttons {
             margin-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         button {
@@ -48,11 +57,29 @@
 
         img {
             width: 200px;
-            margin-bottom: 30px;
+            margin-top: 30px;
+            max-width: 100%;
         }
 
         .message {
-            margin-top: 30px;
+            margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            text-align: center;
+            width: 90%; /* Este sigue igual para ocupar más espacio horizontal */
+        }
+
+        .message img {
+            width: 400px;  /* Agrandé la imagen al doble */
+            margin-top: 15px;
         }
 
     </style>
@@ -61,7 +88,7 @@
 
     <div class="container">
         <!-- Imagen inicial -->
-        <img src="https://i.imgflip.com/8h26xs.png" alt="Peluches abrazados">
+        <img src="https://i.imgflip.com/8h26xs.png" alt="Peluches abrazados" id="initialImage">
         
         <h1>¿Quieres ser mi San Valentín?</h1>
         <div class="buttons">
@@ -76,6 +103,7 @@
         let size = 1.5;
         let clickCount = 0;
 
+        // Función para reducir el tamaño del botón "No" al hacer clic
         function shrinkNo() {
             clickCount++;
 
@@ -101,11 +129,17 @@
             // Cambiar el texto y ocultar las opciones
             document.querySelector("h1").style.display = "none";
             document.querySelector(".buttons").style.display = "none";
+            document.getElementById("initialImage").style.display = "none";  // Ocultar la imagen inicial
             
+            // Mostrar el mensaje final con el GIF
             let messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
-            messageDiv.innerHTML = `<p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p><img src="https://sweezy-cursors.com/wp-content/uploads/cursor/milk-amp-mocha-bear-love/milk-mocha-bear-love-custom-cursor.png" alt="Peluches abrazados">`;
+            messageDiv.innerHTML = `
+                <p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p>
+                <img src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches GIF">
+            `;
             document.body.appendChild(messageDiv);
+            messageDiv.style.display = "block";  // Hacer visible el mensaje
         }
     </script>
 
